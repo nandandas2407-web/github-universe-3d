@@ -12,7 +12,7 @@ Built using **JavaScript, Three.js, and modern web technologies**.
 
 You can preview the project live:
 ```
-https://nandandas.github.io/github-universe-3d/
+https://github-universe-bynandan.netlify.app/
 ```
 
 ---
