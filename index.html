@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>GitHub Universe 3D</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+     ENTRY SCREEN
+═══════════════════════════════════ -->
+<div id="entry" class="entry">
+  <canvas id="bg-canvas"></canvas>
+  <div class="entry-content">
+    <div class="entry-logo">
+      <div class="logo-orbit"><div class="logo-planet"></div></div>
+      <span>GitHub Universe</span>
+    </div>
+    <h1 class="entry-headline">Explore your<br><em>code galaxy</em></h1>
+    <p class="entry-sub">Pilot a spaceship through your repositories rendered as living planets in 3D space.</p>
+    <div class="entry-form" id="entry-form">
+      <div class="input-row">
+        <span class="input-prefix">github.com /</span>
+        <input id="username-input" type="text" placeholder="username" autocomplete="off" spellcheck="false"/>
+      </div>
+      <button id="launch-btn" class="launch-btn">
+        <span class="btn-text">Launch</span>
+        <svg class="btn-icon" viewBox="0 0 20 20"><path d="M10 2l8 8-8 8M2 10h16" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="entry-error" id="entry-error"></div>
+    </div>
+    <div class="entry-examples">
+      <span>Try</span>
+      <button class="ex-btn" data-u="torvalds">torvalds</button>
+      <button class="ex-btn" data-u="gaearon">gaearon</button>
+      <button class="ex-btn" data-u="sindresorhus">sindresorhus</button>
+      <button class="ex-btn" data-u="antirez">antirez</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     LOADING SCREEN
+═══════════════════════════════════ -->
+<div id="loader" class="loader hidden">
+  <div class="loader-ring"></div>
+  <div class="loader-text">
+    <div class="loader-title" id="loader-title">Scanning repositories…</div>
+    <div class="loader-bar"><div class="loader-fill" id="loader-fill"></div></div>
+    <div class="loader-count" id="loader-count">0 repos found</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     MAIN GALAXY VIEW
+═══════════════════════════════════ -->
+<div id="app" class="app hidden">
+  <canvas id="galaxy-canvas"></canvas>
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="topbar-back" id="btn-back" title="Back to entry">
+      <svg viewBox="0 0 20 20"><path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+    </button>
+    <div class="topbar-user" id="topbar-user">
+      <div class="user-avatar" id="user-avatar"></div>
+      <div class="user-info">
+        <div class="user-name" id="user-name">—</div>
+        <div class="user-stats" id="user-stats">— repos · — stars</div>
+      </div>
+    </div>
+    <div class="topbar-search-wrap">
+      <input class="topbar-search" id="search-input" type="text" placeholder="Search repos…" autocomplete="off"/>
+      <div class="search-dropdown" id="search-dropdown"></div>
+    </div>
+    <div class="topbar-modes" id="topbar-modes">
+      <button class="mode-pill active" data-mode="default">Galaxy</button>
+      <button class="mode-pill" data-mode="language">Language</button>
+      <button class="mode-pill" data-mode="stars">Stars</button>
+      <button class="mode-pill" data-mode="activity">Activity</button>
+    </div>
+  </header>
+
+  <!-- MINIMAP -->
+  <canvas id="minimap" class="minimap"></canvas>
+  <div class="minimap-label">RADAR</div>
+
+  <!-- SPEED HUD -->
+  <div class="speed-hud" id="speed-hud">
+    <div class="speed-bar-wrap">
+      <div class="speed-bar" id="speed-bar"></div>
+    </div>
+    <div class="speed-label" id="speed-label">0.0</div>
+  </div>
+
+  <!-- PLANET INFO CARD -->
+  <div class="planet-card" id="planet-card">
+    <button class="card-close" id="card-close">✕</button>
+    <div class="card-planet-preview" id="card-preview"></div>
+    <div class="card-body">
+      <div class="card-lang-dot" id="card-lang-dot"></div>
+      <h2 class="card-title" id="card-title">—</h2>
+      <div class="card-lang" id="card-lang">—</div>
+      <p class="card-desc" id="card-desc">—</p>
+      <div class="card-metrics">
+        <div class="metric"><div class="metric-val" id="cm-stars">—</div><div class="metric-key">Stars</div></div>
+        <div class="metric"><div class="metric-val" id="cm-forks">—</div><div class="metric-key">Forks</div></div>
+        <div class="metric"><div class="metric-val" id="cm-issues">—</div><div class="metric-key">Issues</div></div>
+        <div class="metric"><div class="metric-val" id="cm-watchers">—</div><div class="metric-key">Watch</div></div>
+      </div>
+      <div class="card-meta">
+        <span class="card-size" id="card-size">—</span>
+        <span class="card-updated" id="card-updated">—</span>
+      </div>
+      <a href="#" id="card-link" target="_blank" rel="noopener" class="card-link-btn">
+        Open on GitHub <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- PROXIMITY LABEL (hover approach) -->
+  <div class="proximity-label hidden" id="prox-label">
+    <div class="prox-name" id="prox-name">repo</div>
+    <div class="prox-hint">Press <kbd>E</kbd> / tap to inspect</div>
+  </div>
+
+  <!-- DESKTOP CONTROLS HINT -->
+  <div class="controls-hint" id="controls-hint">
+    <span>WASD · move</span>
+    <span>Mouse · look</span>
+    <span>Scroll · speed</span>
+    <span>E · inspect</span>
+    <span>Click · lock aim</span>
+  </div>
+
+  <!-- MOBILE JOYSTICKS (injected by nipplejs) -->
+  <div id="joystick-move" class="joystick-zone joystick-left"></div>
+  <div id="joystick-look" class="joystick-zone joystick-right"></div>
+  <button class="mobile-inspect-btn hidden" id="mobile-inspect">Inspect</button>
+</div>
+
+<!-- ═══════════════════════════════════
+     TOAST
+═══════════════════════════════════ -->
+<div id="toast-root" class="toast-root"></div>
+
+<!-- SCRIPTS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nipplejs/0.10.1/nipplejs.min.js"></script>
+<script src="api.js"></script>
+<script src="engine.js"></script>
+<script src="ship.js"></script>
+<script src="ui.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
