@@ -10,7 +10,7 @@ const Engine = (() => {
   let raycaster, _mouse = new THREE.Vector2(-9999,-9999);
 
   // Scene groups
-  let starsPoints, nebulaGroup, dustPoints;
+  let starsPoints, nebulaGroup, dustPoints, cometsGroup;
   let planetsGroup, ringsGroup, moonsGroup, asteroidsGroup;
   let blackHoleGroup, coreGroup;
   let constellationGroup;
@@ -62,6 +62,7 @@ const Engine = (() => {
     _buildDust();
     _buildCore();
     _buildBlackHole();
+    _buildComets();
 
     planetsGroup      = new THREE.Group(); scene.add(planetsGroup);
     ringsGroup        = new THREE.Group(); scene.add(ringsGroup);
@@ -136,6 +137,46 @@ const Engine = (() => {
       })));
     });
     scene.add(nebulaGroup);
+  }
+
+  // ─── COMETS ──────────────────────────────────
+  function _buildComets() {
+    cometsGroup = new THREE.Group();
+    const N = 8;
+    for (let i = 0; i < N; i++) {
+      const comet = new THREE.Group();
+
+      // Core
+      const core = new THREE.Mesh(
+        new THREE.SphereGeometry(0.8, 8, 8),
+        new THREE.MeshBasicMaterial({ color: 0xffffff })
+      );
+      comet.add(core);
+
+      // Trail
+      const trailGeo = new THREE.ConeGeometry(1.5, 15, 8);
+      trailGeo.translate(0, -7.5, 0);
+      trailGeo.rotateX(Math.PI / 2);
+      const trailMat = new THREE.MeshBasicMaterial({
+        color: 0x88ccff, transparent: true, opacity: 0.3,
+        depthWrite: false, blending: THREE.AdditiveBlending
+      });
+      const trail = new THREE.Mesh(trailGeo, trailMat);
+      comet.add(trail);
+
+      const a = Math.random() * Math.PI * 2;
+      const r = 100 + Math.random() * 200;
+      comet.position.set(Math.cos(a)*r, (Math.random()-.5)*100, Math.sin(a)*r);
+
+      const speed = 15 + Math.random() * 15;
+      const direction = new THREE.Vector3(Math.random()-.5, Math.random()-.5, Math.random()-.5).normalize();
+
+      comet.quaternion.setFromUnitVectors(new THREE.Vector3(0,0,1), direction);
+      comet.userData = { direction, speed, resetRadius: r + 50 };
+
+      cometsGroup.add(comet);
+    }
+    scene.add(cometsGroup);
   }
 
   // ─── COSMIC DUST ─────────────────────────────
@@ -609,6 +650,23 @@ const Engine = (() => {
     blackHoleGroup.rotation.y += .008;
     if (blackHoleGroup.children[1]) blackHoleGroup.children[1].rotation.z = t*1.2;
     if (blackHoleGroup.children[2]) blackHoleGroup.children[2].rotation.z = -t*.7;
+
+    // Comets movement
+    if (cometsGroup) {
+      cometsGroup.children.forEach(c => {
+        const data = c.userData;
+        c.position.addScaledVector(data.direction, data.speed * dt);
+
+        // Reset comet if it goes too far
+        if (c.position.length() > data.resetRadius * 1.5) {
+          const a = Math.random() * Math.PI * 2;
+          const r = data.resetRadius;
+          c.position.set(Math.cos(a)*r, (Math.random()-.5)*100, Math.sin(a)*r);
+          data.direction.set(Math.random()-.5, Math.random()-.5, Math.random()-.5).normalize();
+          c.quaternion.setFromUnitVectors(new THREE.Vector3(0,0,1), data.direction);
+        }
+      });
+    }
 
     // Stars slow drift
     starsPoints.rotation.y += .000015;

@@ -74,12 +74,25 @@ const UI = (() => {
 
     // Mode pills
     document.querySelectorAll('.mode-pill').forEach(btn => {
+      if (btn.id === 'toggle-constellations') return;
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.mode-pill').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.mode-pill:not(#toggle-constellations)').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         if (_onMode) _onMode(btn.dataset.mode);
       });
     });
+
+    // Constellations toggle
+    const constToggle = document.getElementById('toggle-constellations');
+    if (constToggle) {
+      let constOn = false;
+      constToggle.addEventListener('click', () => {
+        constOn = !constOn;
+        constToggle.textContent = `Constellations: ${constOn ? 'ON' : 'OFF'}`;
+        constToggle.classList.toggle('active', constOn);
+        Engine.showConstellations = constOn;
+      });
+    }
 
     // Card close
     document.getElementById('card-close')?.addEventListener('click', () => {
