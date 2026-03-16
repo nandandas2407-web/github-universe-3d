@@ -1,19 +1,35 @@
-# 🚀 GitHub Universe 3D v2
+<div align="center">
+  <img src="https://github.com/nandan-das/github-universe-3d/assets/YOUR_ASSET_ID/banner.png" alt="GitHub Universe 3D Banner" width="100%">
 
-**GitHub Universe 3D** is a **game-like 3D galaxy explorer** where GitHub repositories become living planets inside a dynamic universe.
+  <h1>🚀 GitHub Universe 3D v2</h1>
 
-Instead of browsing repositories in a list, you **pilot a spaceship** and explore them like a space game.
+  <p><strong>A game-like 3D galaxy explorer where GitHub repositories become living planets inside a dynamic universe.</strong></p>
 
-Built using **JavaScript, Three.js, and modern web technologies**.
+  <p>Instead of browsing repositories in a list, you <strong>pilot a spaceship</strong> and explore them like a space game.</p>
+
+  <p>Built using <strong>JavaScript, Three.js, and modern web technologies</strong>.</p>
+  <br/>
+</div>
 
 ---
 
 # 🌐 Live Preview
 
-You can preview the project live:
-```
-https://github-universe-bynandan.netlify.app/
-```
+You can preview the project live by visiting the link below:
+
+### 👉 [Launch GitHub Universe 3D](https://github-universe-bynandan.netlify.app/) 👈
+
+---
+
+# 🎥 Demo Video
+
+Check out the interactive capabilities, including the new Cinematic Mode and Mobile Support, in action:
+
+<a href="./demo.webm">
+  <img src="https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg" alt="Watch the Demonstration Video" width="800">
+</a>
+
+*(Click the image above to watch the demo video `demo.webm`)*
 
 ---
 
@@ -40,9 +56,11 @@ Users can **fly a spaceship through the galaxy** and inspect repositories intera
 - **Interactive 3D Galaxy:** Explore GitHub repositories as a living, breathing 3D universe.
 - **Dynamic Planet Generation:** Planets are procedurally generated based on real-time repository data.
 - **Spaceship Navigation:** Pilot a spaceship with smooth physics and controls to explore the galaxy.
+- **Cinematic Mode:** Press `C` or toggle the UI to fade out the interface and enjoy a pure, uninterrupted space view.
 - **Constellation View:** Connect repositories by programming language to see language clusters.
 - **Comets and Cosmic Dust:** Experience a dynamic universe with moving comets and ambient cosmic dust.
 - **Multiple Visualization Modes:** View the galaxy by default orbit, clustered by language, ordered by stars, or ordered by recent activity.
+- **Seamless Mobile Support:** Redesigned responsive UI to gracefully support browsing repositories from mobile devices with virtual joysticks and scrollable navigation.
 
 ---
 

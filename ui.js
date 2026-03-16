@@ -74,9 +74,9 @@ const UI = (() => {
 
     // Mode pills
     document.querySelectorAll('.mode-pill').forEach(btn => {
-      if (btn.id === 'toggle-constellations') return;
+      if (btn.id === 'toggle-constellations' || btn.id === 'toggle-cinematic') return;
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.mode-pill:not(#toggle-constellations)').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.mode-pill:not(#toggle-constellations):not(#toggle-cinematic)').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         if (_onMode) _onMode(btn.dataset.mode);
       });
@@ -91,6 +91,26 @@ const UI = (() => {
         constToggle.textContent = `Constellations: ${constOn ? 'ON' : 'OFF'}`;
         constToggle.classList.toggle('active', constOn);
         Engine.showConstellations = constOn;
+      });
+    }
+
+    // Cinematic toggle
+    const cineToggle = document.getElementById('toggle-cinematic');
+    const restoreBtn = document.getElementById('restore-ui-btn');
+    if (cineToggle && restoreBtn) {
+      const toggleCinematic = () => {
+        document.body.classList.toggle('ui-hidden');
+      };
+      cineToggle.addEventListener('click', toggleCinematic);
+      restoreBtn.addEventListener('click', toggleCinematic);
+
+      // Keyboard shortcut (C)
+      window.addEventListener('keydown', (e) => {
+        // Prevent triggering when typing in inputs
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (e.key.toLowerCase() === 'c') {
+          toggleCinematic();
+        }
       });
     }
 

@@ -499,12 +499,64 @@ kbd {
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
 /* ══════════════════════════════
+   CINEMATIC MODE / UI HIDING
+══════════════════════════════ */
+body.ui-hidden .topbar,
+body.ui-hidden .minimap,
+body.ui-hidden .minimap-label,
+body.ui-hidden .speed-hud,
+body.ui-hidden .controls-hint,
+body.ui-hidden .planet-card,
+body.ui-hidden .proximity-label,
+body.ui-hidden .joystick-zone,
+body.ui-hidden .mobile-inspect-btn,
+body.ui-hidden .crosshair {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+body:not(.ui-hidden) .topbar,
+body:not(.ui-hidden) .minimap,
+body:not(.ui-hidden) .minimap-label,
+body:not(.ui-hidden) .speed-hud,
+body:not(.ui-hidden) .controls-hint,
+body:not(.ui-hidden) .planet-card,
+body:not(.ui-hidden) .proximity-label,
+body:not(.ui-hidden) .joystick-zone,
+body:not(.ui-hidden) .mobile-inspect-btn,
+body:not(.ui-hidden) .crosshair {
+  transition: opacity 0.4s ease;
+}
+
+.restore-ui-btn {
+  position: absolute; top: 16px; right: 16px; z-index: 50;
+  padding: 8px 14px; border-radius: 20px;
+  background: rgba(10,15,30,.8); border: 1px solid var(--border);
+  color: var(--text); font-family: var(--font-m); font-size: .75rem;
+  backdrop-filter: blur(8px);
+  cursor: pointer; opacity: 0; pointer-events: none;
+  transition: all 0.3s ease;
+}
+.restore-ui-btn:hover { background: rgba(79,158,255,.2); border-color: var(--accent); }
+body.ui-hidden .restore-ui-btn { opacity: 1; pointer-events: auto; }
+
+
+/* ══════════════════════════════
    RESPONSIVE TOPBAR
 ══════════════════════════════ */
 @media (max-width: 600px) {
-  .topbar-modes { display: none; }
-  .topbar { gap: 8px; }
-  .topbar-search-wrap { max-width: none; }
+  .topbar { flex-wrap: wrap; gap: 8px; padding: 10px; justify-content: space-between; }
+  .topbar-user { margin-right: auto; }
+  .topbar-search-wrap { width: 100%; max-width: none; order: 3; }
+  .topbar-modes {
+    display: flex; width: 100%; order: 4;
+    overflow-x: auto; padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+  .topbar-modes::-webkit-scrollbar { display: none; } /* Safari/Chrome */
+
   .planet-card { right: 10px; left: 10px; width: auto; top: auto; bottom: 180px; transform: none; }
   @keyframes cardIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
   .minimap { width: 80px; height: 80px; bottom: 180px; }
