@@ -17,6 +17,14 @@ https://github-universe-bynandan.netlify.app/
 
 ---
 
+# 🎥 Demo Video
+
+Check out the interactive capabilities, including the new Cinematic Mode and Mobile Support, in action:
+
+[Watch the Demonstration Video](./demo.webm)
+
+---
+
 # 🌌 Project Overview
 
 This project transforms repositories from **GitHub** into a fully navigable **3D galaxy**.
@@ -40,9 +48,11 @@ Users can **fly a spaceship through the galaxy** and inspect repositories intera
 - **Interactive 3D Galaxy:** Explore GitHub repositories as a living, breathing 3D universe.
 - **Dynamic Planet Generation:** Planets are procedurally generated based on real-time repository data.
 - **Spaceship Navigation:** Pilot a spaceship with smooth physics and controls to explore the galaxy.
+- **Cinematic Mode:** Press `C` or toggle the UI to fade out the interface and enjoy a pure, uninterrupted space view.
 - **Constellation View:** Connect repositories by programming language to see language clusters.
 - **Comets and Cosmic Dust:** Experience a dynamic universe with moving comets and ambient cosmic dust.
 - **Multiple Visualization Modes:** View the galaxy by default orbit, clustered by language, ordered by stars, or ordered by recent activity.
+- **Seamless Mobile Support:** Redesigned responsive UI to gracefully support browsing repositories from mobile devices with virtual joysticks and scrollable navigation.
 
 ---
 
