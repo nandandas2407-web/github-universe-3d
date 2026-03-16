@@ -35,6 +35,17 @@ Users can **fly a spaceship through the galaxy** and inspect repositories intera
 
 ---
 
+# ✨ Features
+
+- **Interactive 3D Galaxy:** Explore GitHub repositories as a living, breathing 3D universe.
+- **Dynamic Planet Generation:** Planets are procedurally generated based on real-time repository data.
+- **Spaceship Navigation:** Pilot a spaceship with smooth physics and controls to explore the galaxy.
+- **Constellation View:** Connect repositories by programming language to see language clusters.
+- **Comets and Cosmic Dust:** Experience a dynamic universe with moving comets and ambient cosmic dust.
+- **Multiple Visualization Modes:** View the galaxy by default orbit, clustered by language, ordered by stars, or ordered by recent activity.
+
+---
+
 # ⚡ Quick Start
 
 1. Clone or download the repository
