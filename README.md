@@ -26,7 +26,7 @@ You can preview the project live by visiting the link below:
 Check out the interactive capabilities, including the new Cinematic Mode and Mobile Support, in action:
 
 <a href="./demo.webm">
-  <img src="GitHub-Universe.mp4" alt="Watch the Demonstration Video" width="800">
+  <img src="GitHub-Universe.webm" alt="Watch the Demonstration Video" width="800">
 </a>
 
 *(Click the image above to watch the demo video `demo.webm`)*
