@@ -67,7 +67,7 @@ Users can **fly a spaceship through the galaxy** and inspect repositories intera
 1. Clone or download the repository
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/github-universe-3d.git
+git clone https://github.com/nandandas2407-web/github-universe-3d.git
 ```
 
 2. Open the project folder
