@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/nandan-das/github-universe-3d/assets/YOUR_ASSET_ID/banner.png" alt="GitHub Universe 3D Banner" width="100%">
+  <img src="GitHub-universe.jpg" alt="GitHub Universe 3D Banner" width="100%">
 
   <h1>🚀 GitHub Universe 3D v2</h1>
 
@@ -26,7 +26,7 @@ You can preview the project live by visiting the link below:
 Check out the interactive capabilities, including the new Cinematic Mode and Mobile Support, in action:
 
 <a href="./demo.webm">
-  <img src="https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg" alt="Watch the Demonstration Video" width="800">
+  <img src="GitHub-Universe.mp4" alt="Watch the Demonstration Video" width="800">
 </a>
 
 *(Click the image above to watch the demo video `demo.webm`)*
